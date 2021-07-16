@@ -14,21 +14,21 @@ import argparse
 # Function to Request URL
 def request_url():
     # Request User to enter a website Address
-
     web_view = argparse.ArgumentParser(description='A tutorial of argparse!')
+    if web_view.add_argument("--webdata", required=True,
+                             type=str, help="my data url"):
 
-    web_view.add_argument("--webdata",required=True,
-                          type=str, help="my data url")
+        web_url_pull = web_view.parse_args().webdata
 
-    web_url_pull = web_view.parse_args().webdata
+        # Concatenate the web adDress with HTTPS://WWW.
 
-    # Concatenate the web adDress with HTTPS://WWW.
-    web_main = requests.get("https://www." + web_url_pull + "/")
+        web_main = requests.get("https://www." + web_url_pull + "/")
 
-    # Initialize fetch connection with the help of BeautifulSoup Library
-    fetch_data = BeautifulSoup(web_main.content, 'html.parser')
-    return fetch_data
-
+        # Initialize fetch connection with the help of BeautifulSoup Library
+        fetch_data = BeautifulSoup(web_main.content, 'html.parser')
+        return fetch_data
+    else:
+        exit()
 
 # Function to capture body content of URL
 def display_data():
